@@ -21,15 +21,15 @@ export class ProdutoController implements ProdutoRepository {
     
 
     listarTodos(): void {
-        for (let Produto of this.listaProdutos) {
-            Produto.visualizar();
+        for (let produto of this.listaProdutos) {
+            produto.visualizar();
         }
     }
 
 
-    cadastrar(Produto: Produto): void {
-        this.listaProdutos.push(Produto);
-        console.log(`\nO Produto ${Produto.nome} foi cadastrado com sucesso!`);
+    cadastrar(produto: Produto): void {
+        this.listaProdutos.push(produto);
+        console.log(`\nO Produto ${produto.nome} foi cadastrado com sucesso!`);
     }
 
     atualizar(produto: Produto): void {
@@ -51,20 +51,27 @@ export class ProdutoController implements ProdutoRepository {
             console.log(`\nO Produto de ID ${numero} foi Deletado com Sucesso!`, );
         } else
             console.log("\nProduto não Encontrado!");
+    }
 
+    public procurarPorNome(nome: string): void {
+        const listaPorNome = this.listaProdutos.filter(produto =>
+            produto.nome.toUpperCase().includes(nome.toUpperCase())
+        );
+
+        if (listaPorNome.length > 0) {
+            listaPorNome.forEach(produto => produto.visualizar());
+        } else
+            console.log(`\nO produto "${nome}" não foi encontrado!`);
 
     }
 
     //?MÉTODO AUXILIAR
 
-    public gerarNumero(): number {
-        return ++this.id;
-    }
 
     public buscarNoArray(numero: number): Produto | null {
-        for (let Produto of this.listaProdutos) {
-            if (Produto.id === numero) {
-                return Produto;
+        for (let produto of this.listaProdutos) {
+            if (produto.id === numero) {
+                return produto;
             }
         }
         return null;

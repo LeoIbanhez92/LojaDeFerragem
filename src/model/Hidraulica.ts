@@ -17,12 +17,12 @@ export class Hidraulica extends Produto{
 
     //* MÉTODOS GET E SET
     
-	public get hidraulico(): string {
+	public get hidraulica(): string {
 		return this._hidraulica;
 	}
 
     
-	public set hidraulico(value: string) {
+	public set hidraulica(value: string) {
 		this._hidraulica = value;
 	}
 

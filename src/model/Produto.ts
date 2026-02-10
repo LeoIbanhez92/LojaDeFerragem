@@ -1,3 +1,5 @@
+import { formatarMoeda } from "../util/Currency";
+
 export abstract class Produto {
 
     //! ATRIBUTOS DA CLASSE
@@ -79,7 +81,7 @@ export abstract class Produto {
         console.log(`ID: ${this._id}`);
         console.log(`Nome do Produto: ${this._nome}`);
         console.log(`Tipo do Produto: ${tipo}`);
-        console.log(`Preço do Produto: R$${this._preco.toFixed(2)}`);
+        console.log(`Preço do Produto: ${formatarMoeda(this._preco)}`);
         
     }
 

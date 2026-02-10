@@ -1,6 +1,6 @@
 import { Produto } from "./Produto";
 
-export class Eletrrica extends Produto{
+export class Eletrica extends Produto{
 
     //! ATRIBUTOS DA CLASSE
 

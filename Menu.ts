@@ -1,7 +1,7 @@
 import { ProdutoController } from "./src/controller/ProdutoController";
 import { Input } from "./src/util/Input";
 import { Hidraulica } from "./src/model/Hidraulica";
-import { Eletrrica } from "./src/model/Eletrica";
+import { Eletrica } from "./src/model/Eletrica";
 import { formatarMoeda } from "./src/util/Currency";
 
 const produto = new ProdutoController();
@@ -26,6 +26,7 @@ export function main() {
         console.log("            3 - Buscar Produto por ID                ");
         console.log("            4 - Atualizar Dados do Produto           ");
         console.log("            5 - Apagar Produto                       ");
+        console.log("            6 - Consultar Produto por Nome           ");
         console.log("            0 - Sair                                 ");
         console.log("                                                     ");
         console.log("*****************************************************");
@@ -55,7 +56,7 @@ export function main() {
                 keyPress();
                 break;
             case 3:
-                console.log("\nConsultar dados do Produto - por Id\n");
+                console.log("\nBuscar Produto por ID\n");
                 consultarProdutoPorId();
 
                 keyPress();
@@ -72,8 +73,14 @@ export function main() {
 
                 keyPress();
                 break;
+            case 6:
+                console.log("\nConsultar Produto por Nome\n");
+                consultarProdutosPorNome();
+
+                keyPress();
+                break;
             default:
-                console.log("\nOpção Inválida!\n");
+                console.log("\nERRO: Opção Inválida!\n");
 
                 break;
         }
@@ -100,7 +107,7 @@ function cadastrarProduto() {
         console.log("Digite o nome do material (ex: Tomada, Fio, Disjuntor...): ");
         const eletrica = Input.question("");
         
-        produto.cadastrar(new Eletrrica(produto.gerarId(), nome, tipo, preco, eletrica));
+        produto.cadastrar(new Eletrica(produto.gerarId(), nome, tipo, preco, eletrica));
     }
 }
 
@@ -142,17 +149,17 @@ function atualizarProduto(): void {
 
         switch (tipo) {
             case 1: {
-                let hidraulico: string = (produtoBusca as Hidraulica).hidraulico;
+                let hidraulico: string = (produtoBusca as Hidraulica).hidraulica;
                 console.log(`Informação atual: ${hidraulico}`);
                 hidraulico = Input.question("Digite o (Novo) nome do material: ", { defaultInput: hidraulico });
                 produto.atualizar(new Hidraulica(id, nome, tipo, preco, hidraulico));
                 break;
             }
             case 2: {
-                let eletrica: string = (produtoBusca as Eletrrica).eletrica;
+                let eletrica: string = (produtoBusca as Eletrica).eletrica;
                 console.log(`Informação atual: ${eletrica}`);
                 eletrica = Input.question("Digite o (Novo) nome do material: ", { defaultInput: eletrica });
-                produto.atualizar(new Eletrrica(id, nome, tipo, preco, eletrica));
+                produto.atualizar(new Eletrica(id, nome, tipo, preco, eletrica));
                 break;
             }
         }
@@ -175,6 +182,13 @@ function deletarProduto() {
     }
 }
 
+//! OPÇÃO 6: CONSULTAR PRODUTO POR NOME
+
+function consultarProdutosPorNome() {
+    const nome = Input.question("Digite o nome do Produto: ");
+    produto.procurarPorNome(nome);
+}
+
 //TODOS Função com os dados da pessoa desenvolvedora 
 
 function sobre(): void {
@@ -191,8 +205,8 @@ function criarProdutosTeste(): void {
     produto.cadastrar(new Hidraulica(produto.gerarId(), "Tigre", 1, 85.90, "Misturadoura"));
     produto.cadastrar(new Hidraulica(produto.gerarId(), "Amanco", 1, 2.50, "Registro de parede"));
     
-    produto.cadastrar(new Eletrrica(produto.gerarId(), "Sil", 2, 189.00, "Disjuntor 10A"));
-    produto.cadastrar(new Eletrrica(produto.gerarId(), "Soprano", 2, 15.20, "Tomada 20A"));
+    produto.cadastrar(new Eletrica(produto.gerarId(), "Sil", 2, 189.00, "Disjuntor 10A"));
+    produto.cadastrar(new Eletrica(produto.gerarId(), "Soprano", 2, 15.20, "Tomada 20A"));
 }
 
 main();
