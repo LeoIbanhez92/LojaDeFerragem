@@ -145,7 +145,7 @@ function atualizarProduto(): void {
         nome = Input.question("Digite o (Novo) nome da Marca: ", { defaultInput: nome });
 
         console.log(`\nPreço atual: ${formatarMoeda(preco)}`);
-        preco = Input.questionFloat("Digite o novo preço: ", { defaultInput: preco.toString() });
+        preco = Input.questionFloat("Digite o novo preco: ", { defaultInput: preco.toString() });
 
         switch (tipo) {
             case 1: {
