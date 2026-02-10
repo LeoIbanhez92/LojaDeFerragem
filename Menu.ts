@@ -8,7 +8,7 @@ export function main() {
 
         console.log("*****************************************************");
         console.log("                                                     ");
-        console.log("                 O Rei do Vergalhão");
+        console.log("                 O Rei do Vergalhão                  ");
         console.log("                                                     ");
         console.log("*****************************************************");
         console.log("                                                     ");
